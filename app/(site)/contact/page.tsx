@@ -23,10 +23,30 @@ export default function ContactPage() {
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [submitting, setSubmitting] = useState(false)
+  const [error, setError] = useState('')
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // In production: POST to /api/contact which uses Resend
-    setSubmitted(true)
+    setSubmitting(true)
+    setError('')
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      })
+      if (!res.ok) {
+        const data = await res.json()
+        setError(data.error || 'Something went wrong. Please try again.')
+      } else {
+        setSubmitted(true)
+      }
+    } catch {
+      setError('Something went wrong. Please try again or call us directly.')
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   return (
@@ -183,7 +203,7 @@ export default function ContactPage() {
                     Direct Contact
                   </div>
                   {[
-                    { icon: <Mail size={14} />, val: 'jacobogidi@rocketmail.com' },
+                    { icon: <Mail size={14} />, val: 'hello@jopm.co.uk' },
                     { icon: <Phone size={14} />, val: '07898 922 474' },
                     { icon: <MapPin size={14} />, val: 'Surrey · Hampshire · Berkshire' },
                   ].map(({ icon, val }) => (
@@ -405,9 +425,14 @@ export default function ContactPage() {
                         />
                       </div>
 
-                      <button type="submit" className="btn-primary" style={{ width: '100%', justifyContent: 'center' }}>
-                        Request Consultation <ArrowRight size={14} />
+                      <button type="submit" disabled={submitting} className="btn-primary" style={{ width: '100%', justifyContent: 'center', opacity: submitting ? 0.6 : 1 }}>
+                        {submitting ? 'Sending…' : <> Request Consultation <ArrowRight size={14} /> </>}
                       </button>
+                      {error && (
+                        <p style={{ fontFamily: 'var(--font-dm-sans)', fontSize: '0.8125rem', color: '#e05555', textAlign: 'center', marginTop: 8 }}>
+                          {error}
+                        </p>
+                      )}
                       <p
                         style={{
                           fontFamily: 'var(--font-dm-sans)',

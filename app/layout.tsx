@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://jopm.co.uk'),
+  metadataBase: new URL('https://www.jopm.co.uk'),
   title: {
     default: "JO's Property Management | Premium Short-Term Rental Management UK",
     template: "%s | JO's Property Management",
@@ -18,13 +18,19 @@ export const metadata: Metadata = {
     "Airbnb property manager UK",
   ],
   alternates: {
-    canonical: 'https://jopm.co.uk',
+    canonical: 'https://www.jopm.co.uk',
+    types: {
+      'text/html': [
+        { url: 'https://www.jopm.co.uk', title: "JO's Property Management" },
+        { url: 'https://jopm.uk', title: "JO's Property Management" },
+      ],
+    },
   },
   openGraph: {
     type: "website",
     locale: "en_GB",
     siteName: "JO's Property Management",
-    url: 'https://jopm.co.uk',
+    url: 'https://www.jopm.co.uk',
   },
   robots: {
     index: true,
