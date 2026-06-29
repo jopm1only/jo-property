@@ -1,7 +1,5 @@
 import type { Metadata, Viewport } from 'next'
 import './globals.css'
-import Navbar from '@/components/Navbar'
-import Footer from '@/components/Footer'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://jopm.co.uk'),
@@ -51,9 +49,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
       <body>
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
+        {children}
       </body>
     </html>
   )

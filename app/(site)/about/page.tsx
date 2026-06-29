@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { ArrowRight, BarChart3, Diamond, Cpu, Building2 } from 'lucide-react'
 import { Eyebrow, AnimatedSection, StatCard } from '@/components/ui/primitives'
 import { FinalCTA } from '@/components/sections/HomeSections'
+import Services from '@/components/sections/Services'
 import { CALENDAR_URL } from '@/lib/constants'
 
 export const metadata: Metadata = {
@@ -37,6 +38,8 @@ const expertise = [
 export default function AboutPage() {
   return (
     <>
+      <Services />
+
       {/* Hero */}
       <section
         style={{

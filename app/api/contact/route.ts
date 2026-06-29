@@ -21,7 +21,7 @@ export async function POST(request: Request) {
 
     await resend.emails.send({
       from: 'JO Property Management <noreply@jopm.co.uk>',
-      to: ['jacob@jopm.co.uk'],
+      to: ['jacobogidi@rocketmail.com'],
       reply_to: email,
       subject: `New consultation request — ${firstName} ${lastName}`,
       html: `
@@ -51,7 +51,7 @@ export async function POST(request: Request) {
 
     // Auto-reply to enquirer
     await resend.emails.send({
-      from: "JO's Property Management <jacob@jopm.co.uk>",
+      from: "JO's Property Management <jacobogidi@rocketmail.com>",
       to: [email],
       subject: "We've received your consultation request",
       html: `
@@ -73,13 +73,13 @@ export async function POST(request: Request) {
           </p>
           <p style="color:#555;line-height:1.7;margin-bottom:28px;">
             In the meantime, if you have any urgent questions, please call us directly
-            on <strong>0203 927 4800</strong>.
+            on <strong>07898 922 474</strong>.
           </p>
           <div style="background:#f9f9f9;padding:20px;border-left:3px solid #b8a070;font-style:italic;color:#666;margin-bottom:28px;">
             "Your property, performing at its true potential."
           </div>
           <p style="color:#999;font-size:12px;">
-            JO's Property Management Ltd · jacob@jopm.co.uk · 0203 927 4800
+            JO's Property Management Ltd · jacobogidi@rocketmail.com · 07898 922 474
           </p>
         </div>
       `,

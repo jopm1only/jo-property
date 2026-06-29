@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
 import { ArrowRight, Plus } from 'lucide-react'
 import { Eyebrow, AnimatedSection } from '@/components/ui/primitives'
@@ -618,7 +618,7 @@ export function FAQ() {
               maxWidth: 460,
             }}
           >
-            Questions worth answering honestly.
+            Questions we get frequently.
           </h2>
           <p
             style={{
@@ -630,8 +630,7 @@ export function FAQ() {
               lineHeight: 1.75,
             }}
           >
-            We believe informed clients make better partners. Answered directly,
-            without marketing language.
+            We believe informed clients make better partners. Answered directly.
           </p>
         </AnimatedSection>
 
@@ -694,123 +693,161 @@ export function FAQ() {
 }
 
 /* ── Market Context ────────────────────────────────── */
+const marketData = {
+  Camberley: {
+    summary: "Surrey is driven by London commuters, corporate travellers, Surrey Hills tourism and weddings. It holds some of England's highest long-term rents and a short-stay market that rewards professional management.",
+    ltl: [
+      { bed: '1 Bed', rent: '£1,320 pcm' },
+      { bed: '2 Bed', rent: '£1,975 pcm' },
+      { bed: '3 Bed', rent: '£2,720 pcm' },
+      { bed: '4 Bed', rent: '£3,820 pcm' },
+    ],
+    str: { adr: '£145–£150/night', occ: '54–57%', topDemand: 'Corporate relocation, weddings, Heathrow overflow, Surrey Hills tourism, golf, film production' },
+    investment: { capital: '⭐⭐⭐⭐⭐', yield: '⭐⭐⭐', airbnb: '⭐⭐⭐⭐', corporate: '⭐⭐⭐⭐', overall: '9.4/10' },
+    gaps: 'Premium family homes (3–5 bed), corporate serviced accommodation, mid-term lets for contractors and relocations.',
+  },
+  Berkshire: {
+    summary: "Berkshire commands the strongest short-stay pricing of the three counties, driven by Windsor tourism, Reading's tech sector, Ascot events and Heathrow proximity.",
+    ltl: [
+      { bed: '1 Bed', rent: '£1,225 pcm' },
+      { bed: '2 Bed', rent: '£1,990 pcm' },
+      { bed: '3 Bed', rent: '£1,925 pcm' },
+      { bed: '4 Bed', rent: '£3,450 pcm' },
+    ],
+    str: { adr: '£260–£294/night', occ: '54–58%', topDemand: 'Windsor Castle, LEGOLAND, Ascot Racecourse, Reading business parks, Thames Valley tech firms, Heathrow' },
+    investment: { capital: '⭐⭐⭐⭐', yield: '⭐⭐⭐⭐', airbnb: '⭐⭐⭐⭐⭐', corporate: '⭐⭐⭐⭐⭐', overall: '9.3/10' },
+    gaps: 'Executive homes near stations, pet-friendly premium lets, short-stay supply near Windsor and Ascot.',
+  },
+  Hampshire: {
+    summary: "Hampshire offers lower acquisition costs than Surrey with strong gross yields, backed by the cruise port, New Forest tourism, Winchester visitors and military demand.",
+    ltl: [
+      { bed: '1 Bed', rent: '£920 pcm' },
+      { bed: '2 Bed', rent: '£1,385 pcm' },
+      { bed: '3 Bed', rent: '£1,670 pcm' },
+      { bed: '4 Bed', rent: '£2,320 pcm' },
+    ],
+    str: { adr: '£120–£145/night', occ: '45–55%', topDemand: 'Southampton cruise port, New Forest, Winchester, Portsmouth naval, Farnborough business travel, universities' },
+    investment: { capital: '⭐⭐⭐', yield: '⭐⭐⭐⭐⭐', airbnb: '⭐⭐⭐', corporate: '⭐⭐⭐⭐', overall: '9.0/10' },
+    gaps: 'Properties near cruise terminal, New Forest park, Portsmouth dockyard. Strong summer seasonality creates clear pricing opportunity.',
+  },
+}
+
+type MarketTab = keyof typeof marketData
+
 export function MarketContext() {
+  const [tab, setTab] = React.useState<MarketTab>('Camberley')
+  const d = marketData[tab]
+
   return (
     <section className="section" style={{ background: 'var(--charcoal)' }}>
       <div className="container">
-        <div
-          className="market-context-editorial"
-          style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr 2fr',
-            gap: 64,
-            alignItems: 'start',
-          }}
-        >
-          <AnimatedSection>
-            <Eyebrow>Market Context</Eyebrow>
-            <h2
-              style={{
-                fontFamily: 'var(--font-cormorant)',
-                fontSize: 'clamp(1.75rem, 3vw, 2.5rem)',
-                lineHeight: 1.2,
-                maxWidth: 300,
-              }}
-            >
-              What the numbers are based on.
-            </h2>
-          </AnimatedSection>
+        <AnimatedSection>
+          <Eyebrow>Market Context</Eyebrow>
+          <h2
+            style={{
+              fontFamily: 'var(--font-cormorant)',
+              fontSize: 'clamp(1.75rem, 3vw, 2.5rem)',
+              lineHeight: 1.2,
+              marginBottom: 32,
+              maxWidth: 480,
+            }}
+          >
+            The current market in the area.
+          </h2>
 
-          <AnimatedSection delay={120}>
-            <div
-              style={{
-                fontFamily: 'var(--font-dm-sans)',
-                fontSize: '0.9375rem',
-                color: 'var(--muted)',
-                lineHeight: 1.85,
-                maxWidth: 680,
-              }}
-            >
-              <p style={{ marginBottom: 20 }}>
-                The rental market across Surrey, Hampshire and Berkshire remains
-                tight. The national rental stock is still around 25% below
-                pre-pandemic levels, and while Rightmove reports that asking
-                rents are plateauing in some areas, demand has not meaningfully
-                eased. Long-term rents across this region range from £916 a
-                month for a 1-bed Hampshire flat to £3,817 for a 4-bed Surrey
-                house, based on live Rightmove listings.
-              </p>
-              <p style={{ marginBottom: 20 }}>
-                The short-stay picture varies significantly by county. Berkshire
-                commands the highest nightly rates on Booking.com at around
-                £244 on average, with Windsor driving a meaningful share of
-                that. Hampshire averages £107 a night, supported by the New
-                Forest, Portsmouth, and Winchester. Surrey sits at £124 a night
-                on current Booking.com data. Lower than most people expect,
-                partly because its short-stay stock sits outside the obvious
-                tourist corridors, despite commanding the highest long-term
-                rents in this group.
-              </p>
-              <p>
-                The gap between long-term and short-term income is where the
-                opportunity sits. A 2-bed Surrey flat renting at £1,975 a month
-                generates around £23,700 a year. The same property on Airbnb
-                at 91% occupancy brings in closer to £41,200. The maths is
-                different for every property and location, which is why the
-                figures above are estimates rather than promises.
-              </p>
-            </div>
-          </AnimatedSection>
-        </div>
+          {/* Tabs */}
+          <div style={{ display: 'flex', gap: 2, marginBottom: 40, flexWrap: 'wrap' }}>
+            {(Object.keys(marketData) as MarketTab[]).map(t => (
+              <button
+                key={t}
+                onClick={() => setTab(t)}
+                style={{
+                  fontFamily: 'var(--font-dm-sans)',
+                  fontSize: '0.6875rem',
+                  letterSpacing: '0.18em',
+                  textTransform: 'uppercase',
+                  padding: '10px 24px',
+                  border: '0.5px solid',
+                  borderColor: tab === t ? 'var(--gold)' : 'var(--border-strong)',
+                  background: tab === t ? 'var(--gold)' : 'transparent',
+                  color: tab === t ? 'var(--obsidian)' : 'var(--muted)',
+                  cursor: 'pointer',
+                  fontWeight: tab === t ? 600 : 400,
+                  transition: 'all 0.2s ease',
+                }}
+              >
+                {t}
+              </button>
+            ))}
+          </div>
 
-        <div
-          className="market-county-grid"
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(3, 1fr)',
-            gap: 1,
-            background: 'var(--border)',
-            marginTop: 56,
-          }}
-        >
-          {[
-            { county: 'Surrey',    ltl: '£1,319–£3,817 pcm', str: '£124/night avg', occ: '91%' },
-            { county: 'Hampshire', ltl: '£916–£2,317 pcm',   str: '£107/night avg', occ: '91%' },
-            { county: 'Berkshire', ltl: '£1,225–£3,450 pcm', str: '£244/night avg', occ: '91%' },
-          ].map(({ county, ltl, str, occ }) => (
-            <div key={county} style={{ background: 'var(--obsidian)', padding: '28px 24px' }}>
-              <div style={{ fontFamily: 'var(--font-cormorant)', fontSize: '1.25rem', color: 'var(--cream)', marginBottom: 16 }}>
-                {county}
-              </div>
-              {[
-                { label: 'Long-term let range', val: ltl },
-                { label: 'Booking.com nightly avg', val: str },
-                { label: 'Typical STR occupancy', val: occ },
-              ].map(({ label, val }) => (
-                <div key={label} style={{ marginBottom: 10 }}>
-                  <div style={{ fontFamily: 'var(--font-dm-sans)', fontSize: '0.5625rem', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--muted)', marginBottom: 3 }}>
-                    {label}
-                  </div>
-                  <div style={{ fontFamily: 'var(--font-dm-sans)', fontSize: '0.875rem', color: 'var(--gold)' }}>
-                    {val}
-                  </div>
+          {/* Summary */}
+          <p style={{ fontFamily: 'var(--font-dm-sans)', fontSize: '0.9375rem', color: 'var(--muted)', lineHeight: 1.8, maxWidth: 680, marginBottom: 40 }}>
+            {d.summary}
+          </p>
+
+          {/* Data grid */}
+          <div className="market-county-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 1, background: 'var(--border)', marginBottom: 1 }}>
+            {/* Long-term rents */}
+            <div style={{ background: 'var(--obsidian)', padding: '28px 24px' }}>
+              <div style={{ fontFamily: 'var(--font-dm-sans)', fontSize: '0.5625rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--gold)', marginBottom: 16 }}>Long-Term Rents</div>
+              {d.ltl.map(({ bed, rent }) => (
+                <div key={bed} style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 10, borderBottom: '0.5px solid var(--border)', paddingBottom: 8 }}>
+                  <span style={{ fontFamily: 'var(--font-dm-sans)', fontSize: '0.8125rem', color: 'var(--muted)' }}>{bed}</span>
+                  <span style={{ fontFamily: 'var(--font-dm-sans)', fontSize: '0.8125rem', color: 'var(--cream)' }}>{rent}</span>
                 </div>
               ))}
             </div>
-          ))}
-        </div>
-        <div
-          style={{
-            fontFamily: 'var(--font-dm-sans)',
-            fontSize: '0.6875rem',
-            color: 'var(--muted)',
-            marginTop: 12,
-            lineHeight: 1.6,
-          }}
-        >
-          Sources: Rightmove live listings (long-term rents) and Booking.com county apartment pages (short-term nightly rates), June 2026.
-          Occupancy rates based on observed regional STR performance. All figures are estimates.
-        </div>
+
+            {/* Short-term */}
+            <div style={{ background: 'var(--obsidian)', padding: '28px 24px' }}>
+              <div style={{ fontFamily: 'var(--font-dm-sans)', fontSize: '0.5625rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--gold)', marginBottom: 16 }}>Short-Term Lets</div>
+              {[
+                { label: 'Avg nightly rate', val: d.str.adr },
+                { label: 'Typical occupancy', val: d.str.occ },
+              ].map(({ label, val }) => (
+                <div key={label} style={{ marginBottom: 14 }}>
+                  <div style={{ fontFamily: 'var(--font-dm-sans)', fontSize: '0.5625rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--muted)', marginBottom: 4 }}>{label}</div>
+                  <div style={{ fontFamily: 'var(--font-cormorant)', fontSize: '1.25rem', color: 'var(--cream)' }}>{val}</div>
+                </div>
+              ))}
+              <div style={{ marginTop: 8 }}>
+                <div style={{ fontFamily: 'var(--font-dm-sans)', fontSize: '0.5625rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--muted)', marginBottom: 6 }}>Top demand drivers</div>
+                <div style={{ fontFamily: 'var(--font-dm-sans)', fontSize: '0.8125rem', color: 'var(--muted)', lineHeight: 1.65 }}>{d.str.topDemand}</div>
+              </div>
+            </div>
+
+            {/* Investment */}
+            <div style={{ background: 'var(--obsidian)', padding: '28px 24px' }}>
+              <div style={{ fontFamily: 'var(--font-dm-sans)', fontSize: '0.5625rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--gold)', marginBottom: 16 }}>Investment Ranking</div>
+              {[
+                { label: 'Capital growth', val: d.investment.capital },
+                { label: 'Rental yield', val: d.investment.yield },
+                { label: 'Airbnb pricing power', val: d.investment.airbnb },
+                { label: 'Corporate demand', val: d.investment.corporate },
+              ].map(({ label, val }) => (
+                <div key={label} style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 10, borderBottom: '0.5px solid var(--border)', paddingBottom: 8, alignItems: 'center' }}>
+                  <span style={{ fontFamily: 'var(--font-dm-sans)', fontSize: '0.75rem', color: 'var(--muted)' }}>{label}</span>
+                  <span style={{ fontSize: '0.7rem' }}>{val}</span>
+                </div>
+              ))}
+              <div style={{ marginTop: 12, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <span style={{ fontFamily: 'var(--font-dm-sans)', fontSize: '0.75rem', color: 'var(--muted)' }}>Overall potential</span>
+                <span style={{ fontFamily: 'var(--font-cormorant)', fontSize: '1.25rem', color: 'var(--gold)' }}>{d.investment.overall}</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Gaps */}
+          <div style={{ background: 'var(--obsidian)', border: '0.5px solid var(--border)', padding: '20px 24px', marginBottom: 16 }}>
+            <span style={{ fontFamily: 'var(--font-dm-sans)', fontSize: '0.5625rem', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--gold)', marginRight: 12 }}>Biggest gap</span>
+            <span style={{ fontFamily: 'var(--font-dm-sans)', fontSize: '0.875rem', color: 'var(--muted)' }}>{d.gaps}</span>
+          </div>
+
+          <div style={{ fontFamily: 'var(--font-dm-sans)', fontSize: '0.6875rem', color: 'var(--muted)', lineHeight: 1.6 }}>
+            Sources: Rightmove live listings, Booking.com county pages, AirDNA, AirROI, June 2026. All figures are estimates.
+          </div>
+        </AnimatedSection>
       </div>
     </section>
   )

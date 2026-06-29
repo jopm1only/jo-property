@@ -114,7 +114,7 @@ export default function ContactPage() {
                   {
                     step: '03',
                     title: 'You Decide',
-                    desc: "No hard sell. If it makes sense for you, we'll talk next steps. If not, you'll leave with useful market insight either way.",
+                    desc: "Whatever option makes most sense for you, from Airbnb to long-term rental, we'll accommodate your needs. The minimum you walk away with is useful market insight.",
                   },
                 ].map(({ step, title, desc }) => (
                   <div
@@ -183,9 +183,9 @@ export default function ContactPage() {
                     Direct Contact
                   </div>
                   {[
-                    { icon: <Mail size={14} />, val: 'jacob@jopm.co.uk' },
-                    { icon: <Phone size={14} />, val: '0203 927 4800' },
-                    { icon: <MapPin size={14} />, val: 'London · Manchester · Edinburgh' },
+                    { icon: <Mail size={14} />, val: 'jacobogidi@rocketmail.com' },
+                    { icon: <Phone size={14} />, val: '07898 922 474' },
+                    { icon: <MapPin size={14} />, val: 'Surrey · Hampshire · Berkshire' },
                   ].map(({ icon, val }) => (
                     <div
                       key={val}

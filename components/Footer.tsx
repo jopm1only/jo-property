@@ -77,8 +77,8 @@ export default function Footer() {
               &ldquo;Your property, performing at its true potential.&rdquo;
             </p>
             <div style={{ fontFamily: 'var(--font-dm-sans)', fontSize: '0.8125rem', color: 'var(--muted)', lineHeight: 1.9 }}>
-              <div>jacob@jopm.co.uk</div>
-              <div>0203 927 4800</div>
+              <div>jacobogidi@rocketmail.com</div>
+              <div>07898 922 474</div>
               <div style={{ marginTop: 4 }}>London · Manchester · Edinburgh</div>
             </div>
           </div>

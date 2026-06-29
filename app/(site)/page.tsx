@@ -1,16 +1,14 @@
 import type { Metadata } from 'next'
-import Hero from '@/components/sections/Hero'
+import HeroSlider from '@/components/sections/HeroSlider'
 import TrustBar from '@/components/sections/TrustBar'
-import Services from '@/components/sections/Services'
 import Calculator from '@/components/sections/Calculator'
 import Dashboard from '@/components/sections/Dashboard'
+import FloatingCTA from '@/components/FloatingCTA'
 import {
   ProcessTimeline,
-  TrustSignals,
   CaseStudies,
   Comparison,
   FAQ,
-  FinalCTA,
   MarketContext,
   MarketStats,
 } from '@/components/sections/HomeSections'
@@ -24,19 +22,17 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <>
-      <Hero />
+      <HeroSlider />
       <TrustBar />
       <MarketStats />
-      <Services />
       <Calculator />
       <MarketContext />
       <Dashboard />
       <ProcessTimeline />
-      <TrustSignals />
       <CaseStudies />
       <Comparison />
       <FAQ />
-      <FinalCTA />
+      <FloatingCTA />
     </>
   )
 }
