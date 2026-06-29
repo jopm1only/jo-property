@@ -37,7 +37,7 @@ export default async function DashboardPage() {
 
   // Work out which years the last 6 months span
   const monthDefs = last6MonthLabels()
-  const years = [...new Set(monthDefs.map(m => m.year))]
+  const years = Array.from(new Set(monthDefs.map(m => m.year)))
 
   // Step 1: get properties first so we can filter monthly_revenue by property_id
   const { data: properties } = await supabase
