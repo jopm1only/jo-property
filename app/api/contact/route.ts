@@ -6,6 +6,8 @@ const resend = new Resend(process.env.RESEND_API_KEY)
 export async function POST(request: Request) {
   try {
     const body = await request.json()
+    console.log('[contact] form submission received', body)
+
     const { firstName, lastName, email, phone, location, portfolio, message } = body
 
     if (!firstName || !email) {
@@ -15,8 +17,10 @@ export async function POST(request: Request) {
       )
     }
 
+    console.log('[contact] RESEND_API_KEY present:', !!process.env.RESEND_API_KEY)
+
     // Notification email to JO
-    await resend.emails.send({
+    const notifyResult = await resend.emails.send({
       from: "JO's Property Management <hello@jopm.co.uk>",
       to: ['jacobogidi@rocketmail.com'],
       reply_to: email,
@@ -57,9 +61,10 @@ export async function POST(request: Request) {
         </div>
       `,
     })
+    console.log('[resend notify]', JSON.stringify(notifyResult))
 
     // Auto-reply to the enquirer
-    await resend.emails.send({
+    const replyResult = await resend.emails.send({
       from: "JO's Property Management <hello@jopm.co.uk>",
       to: [email],
       subject: "We've received your request — JO's Property Management",
@@ -93,10 +98,11 @@ export async function POST(request: Request) {
         </div>
       `,
     })
+    console.log('[resend reply]', JSON.stringify(replyResult))
 
     return NextResponse.json({ success: true })
   } catch (error) {
-    console.error('Contact form error:', error)
+    console.error('[contact] error:', error)
     return NextResponse.json(
       { error: 'Something went wrong. Please try again or call us directly.' },
       { status: 500 }
